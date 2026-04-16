@@ -1,8 +1,7 @@
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
-public class SmartEnemy : MonoBehaviour
+public class EnemyPlatformer : MonoBehaviour
 {
     [Header("Настройки ИИ")]
     public float moveSpeed = 5f;
