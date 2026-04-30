@@ -35,6 +35,12 @@ public class PlayerPlatformer : MonoBehaviour
     public float groundCheckRadius = 0.2f;
     public LayerMask groundLayer;
 
+    [Header("Ссылки на оружие")]
+    [Tooltip("Ручное оружие")]
+    public WeaponBase activeWeapon;
+    [Tooltip("Атакующий прыжок")]
+    public StaticWeapon jumpAttackWeapon;
+
     private Rigidbody2D rb;
     private float moveInput;
     private bool isGrounded;
@@ -67,6 +73,20 @@ public class PlayerPlatformer : MonoBehaviour
                 jumpRequest = true;
                 doubleJumpUsed = true; // Помечаем, что второй прыжок потрачен
             }
+        }
+
+        // 1. Ручная атака
+        if (Input.GetKeyDown(KeyCode.X) || Input.GetMouseButtonDown(0))
+        {
+            if (activeWeapon != null && !activeWeapon.isAutomatic)
+                activeWeapon.TryAttack();
+        }
+
+        // 2. Логика "Прыжок — это атака"
+        if (jumpAttackWeapon != null)
+        {
+            // Опасно, только если мы НЕ на земле
+            jumpAttackWeapon.isDangerous = rb.velocity.y < 0;//!isGrounded;
         }
 
         ApplyVariableJumpHeight();
