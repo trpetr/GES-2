@@ -3,24 +3,31 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerFP : MonoBehaviour
 {
-    [Header("Movement")]
-    [Tooltip("Max Walk Speed")]
+    [Header("Движение")]
+    [Tooltip("Максимальная скорость")]
     public float maxWalkSpeed = 6f;
-    [Tooltip("Max Acceleration")]
+    [Tooltip("Ускорение")]
     public float acceleration = 50f;
-    [Tooltip("Braking Deceleration")]
+    [Tooltip("Торможение")]
     public float deceleration = 25f;
     [Tooltip("Трение поверхности")]
     public float groundFriction = 8f;
 
-    [Header("Air Control")]
+    [Header("Прыжок")]
     [Range(0, 1)]
+    [Tooltip("Контроль в воздухе")]
     public float airControl = 0.2f;
+    [Tooltip("Сила гравитации")]
     public float gravity = 20f;
+    [Tooltip("Высота прыжка")]
     public float jumpHeight = 1.5f;
+    [Tooltip("Может ли прыгать")]
+    public bool canJump = true;
 
-    [Header("Look Settings")]
+    [Header("Камера")]
+    [Tooltip("Чувствительность мыши")]
     public float mouseSensitivity = 2f;
+    [Tooltip("Объект камеры")]
     public Transform cameraTransform;
 
     private CharacterController controller;
@@ -75,7 +82,7 @@ public class PlayerFP : MonoBehaviour
             }
 
             // Прыжок
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump") && canJump)
             {
                 verticalVelocity = Mathf.Sqrt(jumpHeight * 2f * gravity);
             }
