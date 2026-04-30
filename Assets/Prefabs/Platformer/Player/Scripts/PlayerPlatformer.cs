@@ -3,25 +3,34 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerPlatformer : MonoBehaviour
 {
-    [Header("Movement Settings")]
+    [Header("Настройки перемещения")]
+    [Tooltip("Скорость ходьбы")]
     public float walkSpeed = 7f;
+    [Tooltip("Скорость бега")]
     public float runSpeed = 12f;
+    [Tooltip("Ускорение")]
     public float acceleration = 40f;
+    [Tooltip("Торможение")]
     public float deceleration = 30f;
+    [Tooltip("Сила трения")]
     public float friction = 20f;
 
-    [Header("Jump Settings")]
+    [Header("Настройки прыжка")]
+    [Tooltip("Сила прыжка")]
     public float jumpForce = 14f;
+    [Tooltip("Гравитация")]
     public float gravityScale = 3f;
+    [Tooltip("Ускорение падения")]
     public float fallMultiplier = 1.8f;
+    [Tooltip("Сила второго прыжка")]
     public float lowJumpMultiplier = 2.5f;
 
-    [Header("Abilities")]
-    [Tooltip("Включить/выключить двойной прыжок")]
+    [Header("Способности")]
+    [Tooltip("Двойной прыжок")]
     public bool canDoubleJump = true;
     private bool doubleJumpUsed; // Флаг: был ли уже использован второй прыжок
 
-    [Header("Ground Detection")]
+    [Header("Обнаружение поверхности")]
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
     public LayerMask groundLayer;

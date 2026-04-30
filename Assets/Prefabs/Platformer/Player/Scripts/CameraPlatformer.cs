@@ -3,31 +3,44 @@ using UnityEngine;
 public class CameraPlatformer : MonoBehaviour
 {
 
-    [Header("Target")]
+    [Header("Цель")]
     [SerializeField] private Transform target;
 
-    [Header("Boom Settings")]
+    [Header("Настройки камеры")]
+    [Tooltip("Отдаление камеры")]
     [SerializeField] private float boomLength = 5f;
+    [Tooltip("Сдвиг камеры по высоте")]
     [SerializeField] private float boomHeight = 2f;
+    [Tooltip("Сдвиг камеры по 3 осям")]
     [SerializeField] private Vector3 boomOffset = Vector3.zero;
 
-    [Header("Dead Zone")]
+    [Header("Мёртвая зона")]
+    [Tooltip("Зона, в которой персонаж может двигаться, но камера его не преследует")]
     [SerializeField] private bool enableDeadZone = true;
+    [Tooltip("Размер зоны")]
     [SerializeField] private Vector2 deadZoneSize = new Vector2(3f, 2f);
+    [Tooltip("Глубина зоны")]
     [SerializeField] private float deadZoneDepth = 1.5f;
+    [Tooltip("Прикрепить на старте")]
     [SerializeField] private bool snapOnStart = true;
 
-    [Header("Lag / Smoothing")]
+    [Header("Задержка / Сглаживание")]
+    [Tooltip("Задержка перемещения")]
     [SerializeField] private float positionLagSpeed = 10f;
+    [Tooltip("Задержка поворота")]
     [SerializeField] private float rotationLagSpeed = 8f;
 
-    [Header("Collision")]
+    [Header("Коллизия")]
+    [Tooltip("Будет ли камера ударяться о коллизии")]
     [SerializeField] private bool enableCollision = true;
     [SerializeField] private LayerMask collisionMask = -1;
+    [Tooltip("Радиус коллизии камеры")]
     [SerializeField] private float collisionRadius = 0.2f;
+    [Tooltip("Минимальное расстояние, на которое камера может приблизиться к игроку из-за столкновений")]
     [SerializeField] private float minBoomLength = 0.5f;
 
-    [Header("Debug")]
+    [Header("Отладка")]
+    [Tooltip("Отрисовка линий отладки")]
     [SerializeField] private bool drawDebugLines = true;
 
     private Transform cameraTransform;

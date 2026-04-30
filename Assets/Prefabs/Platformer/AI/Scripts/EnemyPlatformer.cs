@@ -4,11 +4,14 @@ using System.Collections.Generic;
 public class EnemyPlatformer : MonoBehaviour
 {
     [Header("Настройки ИИ")]
+    [Tooltip("Скорость ходьбы")]
     public float moveSpeed = 5f;
+    [Tooltip("Радиус обнаружения игрока")]
     public float detectionRadius = 100f;
+    [Tooltip("Земля")]
     public LayerMask groundLayer;
 
-    [Tooltip("Если true, враг не будет прыгать/спрыгивать, пока игрок на другой платформе")]
+    [Header("Режимы")]
     public bool followPlayerOnlyOnSamePlatform = false;
 
     [Header("Параметры поиска точки")]
@@ -17,7 +20,9 @@ public class EnemyPlatformer : MonoBehaviour
     public float jumpXOffset = 2f;
 
     [Header("Настройки Прыжка")]
+    [Tooltip("Высота прыжка")]
     public float jumpHeightMargin = 1.5f;
+    [Tooltip("Скорость прыжка")]
     public float jumpTimeMultiplier = 2.0f;
 
     [Header("Персонаж игрока")]
