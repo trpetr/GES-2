@@ -10,9 +10,17 @@ public class Health : MonoBehaviour
 
     void Awake() => currentHealth = maxHealth;
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, Vector2 sourcePosition)
     {
         currentHealth -= damage;
+
+        // Если это игрок, вызываем отбрасывание
+        if (entityType == EntityType.Player)
+        {
+            var player = GetComponent<PlayerPlatformer>();
+            if (player != null) player.ApplyKnockback(sourcePosition);
+        }
+
         if (currentHealth <= 0) Die();
     }
 

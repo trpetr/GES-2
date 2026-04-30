@@ -41,6 +41,12 @@ public class PlayerPlatformer : MonoBehaviour
     [Tooltip("Атакующий прыжок")]
     public StaticWeapon jumpAttackWeapon;
 
+    [Header("Настройки отдачи")]
+    public float damageKnockbackForce = 10f; // Сила при получении урона
+    public float bounceForce = 12f;         // Сила прыжка после атаки врага
+    public float knockbackDuration = 0.2f;  // Время потери контроля (опционально)
+    private float knockbackCounter;
+
     private Rigidbody2D rb;
     private float moveInput;
     private bool isGrounded;
@@ -83,7 +89,7 @@ public class PlayerPlatformer : MonoBehaviour
         }
 
         // 2. Логика "Прыжок — это атака"
-        if (jumpAttackWeapon != null)
+        if (jumpAttackWeapon != null && knockbackCounter <= 0)
         {
             // Опасно, только если мы НЕ на земле
             jumpAttackWeapon.isDangerous = rb.velocity.y < 0;//!isGrounded;
@@ -107,6 +113,12 @@ public class PlayerPlatformer : MonoBehaviour
 
     void ApplyMovement()
     {
+        if (knockbackCounter > 0)
+        {
+            knockbackCounter -= Time.fixedDeltaTime;
+            return; // Пока летим от урона, управление заблокировано
+        }
+
         float targetSpeed = moveInput * (isRunning ? runSpeed : walkSpeed);
         float currentAccel = (Mathf.Abs(rb.velocity.x) > 0.1f && Mathf.Sign(moveInput) != Mathf.Sign(rb.velocity.x) && moveInput != 0)
                             ? deceleration : acceleration;
@@ -144,5 +156,21 @@ public class PlayerPlatformer : MonoBehaviour
         {
             doubleJumpUsed = false;
         }
+    }
+
+    public void ApplyKnockback(Vector2 sourcePos)
+    {
+        // Считаем направление (противоположное источнику)
+        float direction = transform.position.x < sourcePos.x ? -1f : 1f;
+
+        // Задаем вектор дуги (по диагонали вверх и в сторону)
+        rb.velocity = new Vector2(direction * damageKnockbackForce, damageKnockbackForce * 0.8f);
+
+        knockbackCounter = knockbackDuration;
+    }
+
+    public void Bounce()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, bounceForce);
     }
 }

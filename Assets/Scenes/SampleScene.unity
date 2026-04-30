@@ -875,10 +875,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1750453931}
-    - target: {fileID: 7596592657677852105, guid: 5f95f5cd929a0e54c9dbdcef3d42ceae, type: 3}
-      propertyPath: hitLayers.m_Bits
-      value: 8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

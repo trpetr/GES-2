@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1539790879750120074}
   - component: {fileID: 7205167019762210000}
   m_Layer: 0
-  m_Name: Projectile2D
+  m_Name: P_Projectile2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134,4 +134,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  lifetime: 5
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 448
   damage: 0
+  master: {fileID: 0}
