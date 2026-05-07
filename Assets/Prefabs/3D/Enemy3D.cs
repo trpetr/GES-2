@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class EnemyFP : MonoBehaviour
+public class Enemy3D : MonoBehaviour
 {
     private NavMeshAgent agent;
     private PlayerFP targetPlayer;
